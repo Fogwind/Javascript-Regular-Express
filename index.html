@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>JavaScript Regular Expression Method</title>
+<link rel="stylesheet" type="text/css" href="style/home.css" />
+</head> 
+<body>
+  <header id="page_header">
+    <h1>JavaScript Regexp Test</h1>
+  </header>
+  
+  <section id="posts">
+    <div id="navbar">
+       <ul id="nav">
+	     <li><a href="#exec" id="exechook">exec()</a></li>
+	     <li><a href="#test" id="testhook">test()</a></li>
+		 <li><a href="#search" id="searchhook">search()</a></li>
+	     <li><a href="#replace" id="replacehook">replace()</a></li>
+		 <li><a href="#match" id="matchhook">match()</a></li>
+		 <li><a href="#split" id="splithook">split()</a></li>
+	   </ul>
+	</div>
+	
+	<div id="explain">
+	   <section class="methodintruction" id="exec">
+	      <h3>exec() Method</h3>
+		  <p>RegExp对象的主要方法是exec(),该方法是专门为捕获组而设计的。exec()接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组，或者在没有匹配项的情况下返回null。返回的数组虽然是Array的实例，但包含两个额外的属性：index和input。其中，index表示匹配项在字符串中的位置，而input表示应用正则表达式的字符串。在数组中。第一项是与整个模式匹配的字符串，其他项是与模式中的捕获组匹配的字符串（如果模式中没有捕获组，则该数组只包含一项）。</p>
+		  <p>对于exec()方法而言，即使在模式中设置了全局标志（g），它每次也只会返回第一个匹配项信息。而在设置了全局标志的情况下，每次调用exec()则都会在字符串中继续查找新匹配项。注意，调用该方法的是正则表达式实例对象。此外，还要注意模式的lastIndex属性的变化情况。在全局匹配模式下，lastIndex的值在每次调用exec()后都会增加，而在非全局模式下，则始终保持不变。</p>
+		  <p><a href="exec.html" class="testlink">点我去测试</a></p>
+	   </section>
+	   
+	   <section class="methodintruction" id="test">
+	      <h3>test() Method</h3>
+		  <p>RegExp对象的第二个方法是test()，它接受一个字符串。在模式与该参数匹配的情况下返回true，否则，返回false。当一个全局正则表达式调用test()方法时，它的行为和exec()相同，因为它从lastIndex指定的位置处开始检索某个字符串，如果它找到了一个匹配结果，那么他就立即设置lastIndex为当前匹配子串的结束位置。这样一来，就可以使用test()方法来遍历字符串，就像用exec()方法一样。调用该方法的也是正则表达式实例对象。</p>
+		  <p><a href="test.html" class="testlink">点我去测试</a></p>
+	   </section>
+	   
+	   <section class="methodintruction" id="search">
+	      <h3>search() Method</h3>
+		  <p>String类型支持4种使用正则表达式的方法。最简单的是search()。它的参数是一个正则表达式，总是返回第一个与之匹配的子串的起始位置，如果找不到匹配的子串，它将返回-1。如果search()方法的参数不是正则表达式，则首先会通过RegExp构造函数将它转换成正则表达式，search()方法不支持全局检索，因为它忽略正则表达式参数中的修饰符g。</p>
+		  <p><a href="search.html" class="testlink">点我去测试</a></p>
+	   </section>
+	   
+	   <section class="methodintruction" id="replace">
+	      <h3>replace() Method</h3>
+		  <p>replace()方法是String中一个用于模式匹配的方法，该方法用于替换子字符串的操作，调用它的是一个字符串。这个方法接受两个参数：第一个参数可以是一个RegExp对象或一个字符串（这个字符串不会被转换成正则表达式），第二个参数可以是一个字符串或一个函数。如果第一个参数是字符串，那么只会替换匹配到的第一个子字符串。要想替换所有符合匹配要求的子字符串，唯一的办法就是提供一个正则表达式，而且要指定全局(g)标志。</p>
+		  <p>如果第二个参数是字符串，那么还可以使用一些特殊的字符序列，将正则表达式操作得到的值插入到结果字符串中。下表列出了ECMAScript提供的这些特殊的字符序列：</p>
+		  <table>
+		    <caption>ECMAScript提供的特殊的字符序列</caption>
+			<tr>
+			   <th class="firstcol">字符序列</th>
+			   <th>替换文本</th>
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$$</td>
+			   <td>$</td>
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$&</td>
+			   <td>匹配整个模式的子字符串。与RegExp.lastMatch的值相同。</td>
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$'</td>
+			   <td>匹配的子字符串之前的子字符串。与RegExp.leftContext的值相同。</td>
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$`</td>
+			   <td>匹配的子字符串之后的子字符串。与RegExp.rightContext的值相同。</td>
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$n</td>
+			   <td>匹配第n个捕获组的子字符串，其中n等于0~9。例如$1是匹配第一个捕获组的子字符串，以此类推。如果正则表达式中没有定义捕获组，则使用空字符串。</td>
+			   
+			</tr>
+			
+			<tr>
+			   <td class="firstcol">$n</td>
+			   <td>匹配第nn个捕获组的子字符串，其中nn等于01~99。例如$01是匹配第一个捕获组的子字符串，以此类推。如果正则表达式中没有定义捕获组，则使用空字符串。</td>
+			</tr>
+		  </table>
+		  <p>replace()方法的第二个参数也可以是一个函数。在只有一个匹配项（即与模式匹配的字符串）的情况下，会向这个函数传递3个参数：模式的匹配项、模式匹配项在字符串中的位置和原始字符串。在正则表达式定义了多个捕获组的情况下，传递给函数的参数依次是模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项......，但最后两个参数仍然是模式匹配项在字符串中的位置和原始字符串。这个函数应该返回一个字符串，表示要替换匹配项的那个字符串。</p>
+		  <p><a href="replace.html" class="testlink">点我去测试</a></p>
+	   </section>
+	   
+	   <section class="methodintruction" id="match">
+	      <h3>match() Method</h3>
+		  <p>match()方法是String类型最常用的正则表达式。它的唯一参数就是一个正则表达式（或通过RegExp()构造函数将其转换为正则表达式）。如果没有找到任何匹配的文本，match()将返回null。否则，它返回的是一个由匹配结果组成的数组。</p>
+		  <p>如果该正则表达式设置了修饰符g，match()方法将执行全局检索，找到所有匹配的子字符串，则该方法返回的数组包含字符串中所有匹配的子串，而且也没有index属性或input属性。在全局检索模式下，match()即不提供与子表达式（捕获组）匹配的文本的信息，也不声明每个匹配子串的位置。</p>
+		  <p>如果这个正则表达式没有设置修饰符g，match()就不会进行全局检索，它只检索第一个匹配。但即使match()执行的不是全局检索，它也返回一个数组。在这种情况下，数组的第一个元素就是匹配的字符串，余下的元素则是正则表达式中用圆括号括起来的子表达式（捕获组）。值得注意的是，给字符串的match()方法传入一个非全局的正则表达式，实际上和给这个正则表达式的exec()方法传入该字符串的结果是一模一样的，它返回的数组带有两个属性：index和input。</p>
+		  <p><a href="match.html" class="testlink">点我去测试</a></p>
+	   </section>
+	   
+	   <section class="methodintruction" id="split">
+	      <h3>split() Method</h3>
+		  <p>String类型的最后一个和正则表达式相关的方法是split()。这个方法将调用它的字符串从与参数匹配的位置拆分为一个个子串，这些子串组成一个数组并返回该数组。如果调用该方法的字符串中不存在作为参数的子串，则不对字符串进行拆分，返回的数组中只包含一项，而且就是调用该方法的那个字符串。</p>
+		  <p>split()方法可以接受两个参数，第一个参数是必选的，可以是字符串，也可以是一个正则表达式。第二个参数是可选的，该参数可指定返回的数组的最大长度。如果设置了该参数，返回的数组长度不会多于这个参数。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。</p>
+		  <p>该方法返回的数组中不包含与参数匹配的子串。但是，如果第一个参数是包含子表达式（捕获组）的正则表达式，那么返回的数组中包括与这些子表达式（捕获组）匹配的子串，但不包括与整个正则表达式匹配的文本。
+		  </p>
+		  <p><a href="split.html" class="testlink">点我去测试</a></p>
+	   </section>
+	</div>
+  </section>
+
+  
+  <footer id="page_footer">
+    Created by Fogwind
+  </footer>
+  <script type="text/javascript" src="script/home.js"></script>
+</body>
+</html>
