@@ -1,0 +1,32 @@
+/******模板样式******/
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 62.5%;
+}
+#page_header{
+	background-color: #696969;
+	color: #FFFFFF;
+	font-size: 1em;
+	padding: 0.5em;
+}
+#page_footer{
+	text-align: center;
+	background-color: #FF1493;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 1em 1em;
+}
+#page_footer a{
+	color: #FFFFFF;
+}
+#posts{
+	padding: 2em;
+	text-align: center;
+	margin-left: 24%;
+	margin-right: 24%;
+	overflow: hidden;
+}
