@@ -1,0 +1,44 @@
+function addEventLoad(func) {
+	var oldLoad = window.onload;
+	if (typeof oldLoad != "function") {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			oldLoad();
+			func();
+		};
+	}
+}
+
+function outPut(orig,regexp,rep) {
+	var result = document.getElementById('result');
+	var mached_str = orig.replace(regexp,rep);
+	result.innerHTML = mached_str;
+}
+function replaceTest() {
+    var butt = document.getElementById('submit');
+
+    butt.onclick = function (){
+		var flag = document.getElementById('flag');
+		var flag_text = flag.value;
+		
+		var regex = document.getElementById('regex');
+        var regex_text = regex.value;
+		var regularExpression;
+		if(flag_text == ''){
+			regularExpression = new RegExp(regex_text);
+		} else {
+			regularExpression = new RegExp(regex_text,flag_text);
+		}
+		 
+
+        var original = document.getElementById('original');
+        var original_text = original.value;
+
+        var replace = document.getElementById('replace');
+        var replace_text = replace.value;
+		outPut(original_text,regularExpression,replace_text);
+    };		
+}
+
+addEventLoad(replaceTest);
